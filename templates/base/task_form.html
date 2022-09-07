@@ -1,0 +1,5 @@
+<h1>task form</h1>
+<form method="post">
+    {% comment %} ## wajib ini csrf_token karena kalau ga gitu gabisa {% endcomment %} {% csrf_token %} {{form.as_p}}
+    <button type="submit" value="submit">submit</button>
+</form>

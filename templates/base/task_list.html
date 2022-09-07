@@ -1,0 +1,69 @@
+{% load static %} {% if request.user.is_authenticated %}
+
+<div>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+{% else %}
+<div>
+    <a href="{% url 'login' %}">login</a>
+</div>
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href=" {% static 'css/base/styleIndex.css' %} " />
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <p>{{request.user}}</p>
+            <a href="{% url 'task-create' %} ">
+                <button>goto add task</button>
+            </a>
+            <table>
+                <tr>
+                    <th class="column">id</th>
+                    <th class="column">name</th>
+                    <th class="column">user</th>
+                    <th class="column">description</th>
+                    <th class="column">complete</th>
+                    <th class="column">action</th>
+                </tr>
+                {% for task in tasks %}
+                <tr>
+                    <td class="column">{{task.id}}</td>
+                    <td class="column">{{task.title}}</td>
+                    <td class="column">{{task.user}}</td>
+                    <td class="column">{{task.description}}</td>
+                    {% if task.complete == True %}
+                    <td class="column">sudah</td>
+                    {% else %}
+                    <td class="column">belum</td>
+                    {% endif %}
+                    <td class="column">
+                        <a href="task/{{task.id}}">
+                            <button>View Details</button>
+                        </a>
+                        <a href="task-update/{{task.id}}">
+                            <button>task update</button>
+                        </a>
+                        <a href="task-delete/{{task.id}}">
+                            <button>task delete</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>
