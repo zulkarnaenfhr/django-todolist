@@ -23,7 +23,10 @@
     </head>
     <body>
         <div class="container">
-            <h1>{{count}}</h1>
+            <form action="" method="get">
+                <input type="text" name="search-area" value="{{search_input}}" />
+                <input type="submit" name="Search" />
+            </form>
             <p>{{request.user}}</p>
             <a href="{% url 'task-create' %} ">
                 <button>goto add task</button>
